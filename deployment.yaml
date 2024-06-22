@@ -1,0 +1,128 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kelichap
+  labels:
+    app: kelichap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kelichap
+  template:
+    metadata:
+      labels:
+        app: kelichap
+    spec:
+      containers:
+      - name: kelichap
+        image: azrulhasni/kelichap:latest
+        ports:
+        - containerPort: 18080
+        imagePullPolicy: Always
+        env:
+          - name: SERVER_PORT
+            value: '${PORT:18080}'
+          - name: SERVER_TOMCAT_MAXSWALLOWSIZE
+            value: '-1'
+          - name: VAADIN_PRODUCTIONMODE
+            value: 'true'
+          - name: VAADIN_WHITELISTEDPACKAGES
+            value: 'com.vaadin,org.vaadin,dev.hilla,com.azrul.kelichap'
+          - name: KELICHAP_DOCUMENTNAMEMAXLENGTH
+            value: '10'
+          - name: KELICHAP_FOLDERCOUNTPERPAGE
+            value: '7'
+          - name: KELICHAP_AUDITRECORDCOUNTPERPAGE
+            value: '7'
+          - name: KELICHAP_NOTESCOUNTPERPAGE
+            value: '5'
+          - name: KELICHAP_MAXFILECOUNTPERUPLOAD
+            value: '5'
+          - name: KELICHAP_MAXFILESIZE
+            value: '12000000'
+          - name: KELICHAP_KEYCLOAK_USERNAME
+            value: 'kelichap'
+          - name: KELICHAP_KEYCLOAK_PASSWORD
+            value: '<some password>'
+          - name: KELICHAP_KEYCLOAK_URL
+            value: 'http://id.azrulhasni.my'
+          - name: KELICHAP_KEYCLOAK_CLIENTID
+            value: 'kelichap-client'
+          - name: KELICHAP_KEYCLOAK_REALM
+            value: 'Kelichap'
+          - name: KELICHAP_KEYCLOAK_TYPESENSE_USERSYNC_CRON  
+            value: '0 0 0 * * *'  
+          - name: KELICHAP_KEYCLOAK_TYPESENSE_USERSYNC_BATCHSIZE  
+            value: '100'  
+          - name: KELICHAP_KEYCLOAK_TYPESENSE_USERSYNC_IMMEDIATEAFTERRUN  
+            value: 'true'  
+          - name: KELICHAP_KEYCLOAK_TYPESENSE_USERSYNC_IMMEDIATERUNCOPYOONLYONEMPTY  
+            value: 'false'
+          - name: SPRING_MAIN_ALLOWBEANDEFINITIONOVERRIDING
+            value: 'true'
+          - name: SPRING_DATASOURCE_URL
+            value: 'jdbc:postgresql://database-host/kelichap'
+          - name: SPRING_DATASOURCE_USERNAME
+            value: 'kelichap'
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: '<some password>'
+          - name: SPRING_JPA_HIBERNATE_DDLAUTO
+            value: 'update'
+          - name: SPRING_JPA_DEFERDATASOURCEINITIALIZATION
+            value: 'true'
+          - name: SPRING_MUSTACHE_CHECKTEMPLATELOCATION
+            value: 'false'
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENTID
+            value: 'kelichap-client'
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_AUTHORIZATIONGRANTTYPE
+            value: 'authorization_code'
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_SCOPE
+            value: 'openid'
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUERURI
+            value: 'http://id.azrulhasni.my/realms/Kelichap'
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_USERNAMEATTRIBUTE
+            value: 'preferred_username'
+          - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUERURI_JWKSETURI
+            value: 'http//id.azrulhasni.my/realms/Kelichap/protocol/openid-connect/certs'
+          - name: SPRING_SERVLET_MULTIPART_MAXFILESIZE
+            value: '20MB'
+          - name: SPRING_SERVLET_MULTIPART_MAXREQUESTSIZE
+            value: '20MB'
+          - name: SPRING_AI_OLLAMA_BASEURL
+            value: 'http://localhost:11434'
+          - name: SPRING_AI_OLLAMA_MODEL
+            value: 'llama2'
+          - name: LOGGING_LEVEL_ORG_ATMOSPHERE
+            value: 'warn'
+          - name: JWT_AUTH_CONVERTER_RESOURCEID
+            value: 'kelichap-client'
+          - name: JWT_AUTH_CONVERTER_PRINCIPALATTRIBUTE
+            value: 'preferred_username'
+          - name: JWT_AUTH_API_CONVERTER_RESOURCEID
+            value: 'kelichap-service'
+          - name: JWT_AUTH_API_CONVERTER_PRINCIPALATTRIBUTE
+            value: 'preferred_username'
+          - name: MINIO_URL
+            value: 'http://minio.default.svc.cluster.local:9000'
+          - name: MINIO_BUCKET
+            value: 'kelichap'
+          - name: MINIO_ACCESSKEY
+            value: 'kelichap'
+          - name: MINIO_SECRETKEY
+            value: '<some password>'
+          - name: TYPESENSE_PROTOCOL
+            value: 'http'
+          - name: TYPESENSE_HOST
+            value: 'typesense.default.svc.cluster.local'
+          - name: TYPESENSE_PORT
+            value: '8108'
+          - name: TYPESENSE_DOCUMENTS_COLLECTION
+            value: 'kelichap-documents'
+          - name: TYPESENSE_APIKEY
+            value: '<some API key>'
+          - name: EXECUTOR_THREADCOUNT
+            value: '10'
+          - name: GOTENBERG_URL
+            value: 'http://my-gotenberg.default.svc.cluster.local'

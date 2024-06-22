@@ -1,0 +1,1212 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Kelichap EDMS",
+    "description": "Enterprise Document Management System",
+    "version": "1.1"
+  },
+  "servers": [
+    {
+      "url": "https://kelichap.azrulhasni.my",
+      "description": "Generated server url"
+    }
+  ],
+  "security": [
+    {
+      "keliichap_oAuth_security_schema": []
+    }
+  ],
+  "paths": {
+    "/folder/{id}": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getFolder_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FolderDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "updateFolder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFolderRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateFolderResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "deleteFolder",
+        "parameters": [
+          {
+            "name": "folderid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/{id}": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getDocument",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentDataDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "updateDocument",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDocumentRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateDocumentResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "deleteDocument",
+        "parameters": [
+          {
+            "name": "docid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/note/{id}": {
+      "put": {
+        "tags": [
+          "note-controller"
+        ],
+        "operationId": "updateNote",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateNoteResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "note-controller"
+        ],
+        "operationId": "deleteNote",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folder": {
+      "post": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "addRootFolder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFolderRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddFolderResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folder/{parentFolderId}/folder": {
+      "post": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "addNonRootFolder",
+        "parameters": [
+          {
+            "name": "parentFolderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFolderRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddFolderResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folder/{folderId}/document": {
+      "post": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "addDocument",
+        "parameters": [
+          {
+            "name": "folderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "reqDTO",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AddDocumentRequestDTO"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddDocumentResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/{docId}/note": {
+      "post": {
+        "tags": [
+          "note-controller"
+        ],
+        "operationId": "addNote",
+        "parameters": [
+          {
+            "name": "docId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddNoteRequestDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoteResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/searchusers": {
+      "get": {
+        "tags": [
+          "search-controller"
+        ],
+        "operationId": "searchUsers",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchUsersResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/searchdocuments": {
+      "get": {
+        "tags": [
+          "search-controller"
+        ],
+        "operationId": "searchDocuments",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortDir",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "countPerPage",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchDocumentsResponseDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/original-file/{id}": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "downloadOriFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamingResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folder/": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "getFolder",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FolderDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/file/{id}": {
+      "get": {
+        "tags": [
+          "document-controller"
+        ],
+        "operationId": "downloadFile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/StreamingResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FolderAccessDTO": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string"
+          },
+          "rights": {
+            "type": "string",
+            "enum": [
+              "Owner",
+              "Create and update",
+              "Read"
+            ]
+          }
+        }
+      },
+      "UpdateFolderRequestDTO": {
+        "type": "object",
+        "properties": {
+          "folderName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "accessMap": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FolderAccessDTO"
+            }
+          }
+        }
+      },
+      "DocumentDataProxyDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "itemType": {
+            "type": "string",
+            "enum": [
+              "FOLDER",
+              "DOCUMENT"
+            ]
+          },
+          "originalName": {
+            "type": "string"
+          }
+        }
+      },
+      "FolderDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rootId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "children": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemProxyDTO"
+            }
+          },
+          "accessMap": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FolderAccessDTO"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "documentChildren": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DocumentDataProxyDTO"
+            }
+          },
+          "folderChildren": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/FolderProxyDTO"
+            }
+          }
+        }
+      },
+      "FolderProxyDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "accessMap": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FolderAccessDTO"
+            }
+          }
+        }
+      },
+      "ItemProxyDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateFolderResponseDTO": {
+        "type": "object",
+        "properties": {
+          "folder": {
+            "$ref": "#/components/schemas/FolderDTO"
+          }
+        }
+      },
+      "UpdateDocumentRequestDTO": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "DocumentDataDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "creationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedBy": {
+            "type": "string"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "rootId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "level": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "children": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemProxyDTO"
+            }
+          },
+          "fileLocation": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "originalName": {
+            "type": "string"
+          },
+          "originalSize": {
+            "type": "string"
+          },
+          "originalMimeType": {
+            "type": "string"
+          },
+          "tags": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NoteDTO"
+            }
+          },
+          "documentChildren": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DocumentDataProxyDTO"
+            }
+          },
+          "folderChildren": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/FolderProxyDTO"
+            }
+          }
+        }
+      },
+      "NoteDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          },
+          "writerUserName": {
+            "type": "string"
+          },
+          "writtenDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UpdateDocumentResponseDTO": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/DocumentDataDTO"
+          }
+        }
+      },
+      "UpdateNoteRequestDTO": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateNoteResponseDTO": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/NoteDTO"
+          }
+        }
+      },
+      "AddFolderRequestDTO": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "folderName": {
+            "type": "string"
+          },
+          "parentFolderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "accessMap": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FolderAccess"
+            }
+          }
+        }
+      },
+      "FolderAccess": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string"
+          },
+          "rights": {
+            "type": "string",
+            "enum": [
+              "Owner",
+              "Create and update",
+              "Read"
+            ]
+          }
+        }
+      },
+      "AddFolderResponseDTO": {
+        "type": "object",
+        "properties": {
+          "folder": {
+            "$ref": "#/components/schemas/FolderDTO"
+          }
+        }
+      },
+      "AddDocumentRequestDTO": {
+        "type": "object",
+        "properties": {
+          "folderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "folderName": {
+            "type": "string"
+          },
+          "tags": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "folderAccess": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FolderAccessDTO"
+            }
+          }
+        }
+      },
+      "AddDocumentResponseDTO": {
+        "type": "object",
+        "properties": {
+          "document": {
+            "$ref": "#/components/schemas/DocumentDataDTO"
+          }
+        }
+      },
+      "AddNoteRequestDTO": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "documentId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AddNoteResponseDTO": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/NoteDTO"
+          }
+        }
+      },
+      "SearchUsersResponseDTO": {
+        "type": "object",
+        "properties": {
+          "searchResults": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchDataDTO": {
+        "type": "object",
+        "properties": {
+          "docId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tags": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "folderName": {
+            "type": "string"
+          },
+          "folderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileLocation": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "rootFolderId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "noteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "snippets": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vectorDistance": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "SearchDocumentsResponseDTO": {
+        "type": "object",
+        "properties": {
+          "totalPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "countPerPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchResults": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchDataDTO"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "StreamingResponseBody": {
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "keliichap_oAuth_security_schema": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://id.azrulhasni.my//realms/Kelichap/protocol/openid-connect/auth"
+          }
+        }
+      }
+    }
+  }
+}

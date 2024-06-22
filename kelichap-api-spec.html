@@ -1,0 +1,1840 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kelichap EDMS</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Kelichap EDMS</h1>
+    <div class="app-desc">Enterprise Document Management System</div>
+    
+    <div class="app-desc">Version: 1.1</div>
+    
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>OAuth AuthorizationUrl:https://id.azrulhasni.my//realms/Kelichap/protocol/openid-connect/authTokenUrl:</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#DocumentController">DocumentController</a></h4>
+  <ul>
+  <li><a href="#addDocument"><code><span class="http-method">post</span> /folder/{folderId}/document</code></a></li>
+  <li><a href="#addNonRootFolder"><code><span class="http-method">post</span> /folder/{parentFolderId}/folder</code></a></li>
+  <li><a href="#addRootFolder"><code><span class="http-method">post</span> /folder</code></a></li>
+  <li><a href="#deleteDocument"><code><span class="http-method">delete</span> /document/{id}</code></a></li>
+  <li><a href="#deleteFolder"><code><span class="http-method">delete</span> /folder/{id}</code></a></li>
+  <li><a href="#downloadFile"><code><span class="http-method">get</span> /file/{id}</code></a></li>
+  <li><a href="#downloadOriFile"><code><span class="http-method">get</span> /original-file/{id}</code></a></li>
+  <li><a href="#getDocument"><code><span class="http-method">get</span> /document/{id}</code></a></li>
+  <li><a href="#getFolder"><code><span class="http-method">get</span> /folder/</code></a></li>
+  <li><a href="#getFolder1"><code><span class="http-method">get</span> /folder/{id}</code></a></li>
+  <li><a href="#updateDocument"><code><span class="http-method">put</span> /document/{id}</code></a></li>
+  <li><a href="#updateFolder"><code><span class="http-method">put</span> /folder/{id}</code></a></li>
+  </ul>
+  <h4><a href="#NoteController">NoteController</a></h4>
+  <ul>
+  <li><a href="#addNote"><code><span class="http-method">post</span> /document/{docId}/note</code></a></li>
+  <li><a href="#deleteNote"><code><span class="http-method">delete</span> /document/note/{id}</code></a></li>
+  <li><a href="#updateNote"><code><span class="http-method">put</span> /document/note/{id}</code></a></li>
+  </ul>
+  <h4><a href="#SearchController">SearchController</a></h4>
+  <ul>
+  <li><a href="#searchDocuments"><code><span class="http-method">get</span> /searchdocuments</code></a></li>
+  <li><a href="#searchUsers"><code><span class="http-method">get</span> /searchusers</code></a></li>
+  </ul>
+
+  <h1><a name="DocumentController">DocumentController</a></h1>
+  <div class="method"><a name="addDocument"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /folder/{folderId}/document</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">addDocument</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">folderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">reqDTO (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">file (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  format: binary</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AddDocumentResponseDTO">AddDocumentResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "document" : {
+    "folderChildren" : [ {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    }, {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    } ],
+    "documentChildren" : [ {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    }, {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    } ],
+    "notes" : [ {
+      "id" : 7,
+      "message" : "message",
+      "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+      "writerUserName" : "writerUserName"
+    }, {
+      "id" : 7,
+      "message" : "message",
+      "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+      "writerUserName" : "writerUserName"
+    } ],
+    "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+    "rootId" : 1,
+    "level" : 5,
+    "lastModifiedBy" : "lastModifiedBy",
+    "originalMimeType" : "originalMimeType",
+    "fileLocation" : "fileLocation",
+    "mimeType" : "mimeType",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "version" : 6,
+    "parentId" : 5,
+    "tags" : [ "tags", "tags" ],
+    "originalName" : "originalName",
+    "size" : 2,
+    "createdBy" : "createdBy",
+    "children" : [ {
+      "name" : "name",
+      "id" : 2
+    }, {
+      "name" : "name",
+      "id" : 2
+    } ],
+    "name" : "name",
+    "id" : 0,
+    "originalSize" : "originalSize",
+    "workflowId" : "workflowId"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AddDocumentResponseDTO">AddDocumentResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addNonRootFolder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /folder/{parentFolderId}/folder</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">addNonRootFolder</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">parentFolderId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AddFolderRequestDTO">AddFolderRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AddFolderResponseDTO">AddFolderResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folder" : {
+    "folderChildren" : [ {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    }, {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    } ],
+    "documentChildren" : [ {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    }, {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    } ],
+    "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+    "rootId" : 1,
+    "level" : 5,
+    "lastModifiedBy" : "lastModifiedBy",
+    "active" : true,
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "version" : 6,
+    "parentId" : 5,
+    "createdBy" : "createdBy",
+    "children" : [ {
+      "name" : "name",
+      "id" : 2
+    }, {
+      "name" : "name",
+      "id" : 2
+    } ],
+    "accessMap" : [ {
+      "authority" : "authority",
+      "rights" : "Owner"
+    }, {
+      "authority" : "authority",
+      "rights" : "Owner"
+    } ],
+    "name" : "name",
+    "id" : 0,
+    "workflowId" : "workflowId"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AddFolderResponseDTO">AddFolderResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="addRootFolder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /folder</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">addRootFolder</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AddFolderRequestDTO">AddFolderRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AddFolderResponseDTO">AddFolderResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folder" : {
+    "folderChildren" : [ {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    }, {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    } ],
+    "documentChildren" : [ {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    }, {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    } ],
+    "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+    "rootId" : 1,
+    "level" : 5,
+    "lastModifiedBy" : "lastModifiedBy",
+    "active" : true,
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "version" : 6,
+    "parentId" : 5,
+    "createdBy" : "createdBy",
+    "children" : [ {
+      "name" : "name",
+      "id" : 2
+    }, {
+      "name" : "name",
+      "id" : 2
+    } ],
+    "accessMap" : [ {
+      "authority" : "authority",
+      "rights" : "Owner"
+    }, {
+      "authority" : "authority",
+      "rights" : "Owner"
+    } ],
+    "name" : "name",
+    "id" : 0,
+    "workflowId" : "workflowId"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AddFolderResponseDTO">AddFolderResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteDocument"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /document/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteDocument</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">docid (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteFolder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /folder/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteFolder</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">folderid (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="downloadFile"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /file/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">downloadFile</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#StreamingResponseBody">StreamingResponseBody</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{ }</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#StreamingResponseBody">StreamingResponseBody</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="downloadOriFile"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /original-file/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">downloadOriFile</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#StreamingResponseBody">StreamingResponseBody</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{ }</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#StreamingResponseBody">StreamingResponseBody</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getDocument"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /document/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getDocument</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#DocumentDataDTO">DocumentDataDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folderChildren" : [ {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  }, {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  } ],
+  "documentChildren" : [ {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  }, {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  } ],
+  "notes" : [ {
+    "id" : 7,
+    "message" : "message",
+    "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+    "writerUserName" : "writerUserName"
+  }, {
+    "id" : 7,
+    "message" : "message",
+    "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+    "writerUserName" : "writerUserName"
+  } ],
+  "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+  "rootId" : 1,
+  "level" : 5,
+  "lastModifiedBy" : "lastModifiedBy",
+  "originalMimeType" : "originalMimeType",
+  "fileLocation" : "fileLocation",
+  "mimeType" : "mimeType",
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
+  "version" : 6,
+  "parentId" : 5,
+  "tags" : [ "tags", "tags" ],
+  "originalName" : "originalName",
+  "size" : 2,
+  "createdBy" : "createdBy",
+  "children" : [ {
+    "name" : "name",
+    "id" : 2
+  }, {
+    "name" : "name",
+    "id" : 2
+  } ],
+  "name" : "name",
+  "id" : 0,
+  "originalSize" : "originalSize",
+  "workflowId" : "workflowId"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#DocumentDataDTO">DocumentDataDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getFolder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /folder/</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getFolder</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#FolderDTO">FolderDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folderChildren" : [ {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  }, {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  } ],
+  "documentChildren" : [ {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  }, {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  } ],
+  "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+  "rootId" : 1,
+  "level" : 5,
+  "lastModifiedBy" : "lastModifiedBy",
+  "active" : true,
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
+  "version" : 6,
+  "parentId" : 5,
+  "createdBy" : "createdBy",
+  "children" : [ {
+    "name" : "name",
+    "id" : 2
+  }, {
+    "name" : "name",
+    "id" : 2
+  } ],
+  "accessMap" : [ {
+    "authority" : "authority",
+    "rights" : "Owner"
+  }, {
+    "authority" : "authority",
+    "rights" : "Owner"
+  } ],
+  "name" : "name",
+  "id" : 0,
+  "workflowId" : "workflowId"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#FolderDTO">FolderDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getFolder1"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /folder/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getFolder1</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#FolderDTO">FolderDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folderChildren" : [ {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  }, {
+    "accessMap" : [ null, null ],
+    "name" : "name",
+    "active" : true,
+    "id" : 9
+  } ],
+  "documentChildren" : [ {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  }, {
+    "originalName" : "originalName",
+    "itemType" : "FOLDER",
+    "name" : "name",
+    "id" : 7
+  } ],
+  "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+  "rootId" : 1,
+  "level" : 5,
+  "lastModifiedBy" : "lastModifiedBy",
+  "active" : true,
+  "creationDate" : "2000-01-23T04:56:07.000+00:00",
+  "version" : 6,
+  "parentId" : 5,
+  "createdBy" : "createdBy",
+  "children" : [ {
+    "name" : "name",
+    "id" : 2
+  }, {
+    "name" : "name",
+    "id" : 2
+  } ],
+  "accessMap" : [ {
+    "authority" : "authority",
+    "rights" : "Owner"
+  }, {
+    "authority" : "authority",
+    "rights" : "Owner"
+  } ],
+  "name" : "name",
+  "id" : 0,
+  "workflowId" : "workflowId"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#FolderDTO">FolderDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateDocument"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /document/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateDocument</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UpdateDocumentRequestDTO">UpdateDocumentRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UpdateDocumentResponseDTO">UpdateDocumentResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "document" : {
+    "folderChildren" : [ {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    }, {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    } ],
+    "documentChildren" : [ {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    }, {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    } ],
+    "notes" : [ {
+      "id" : 7,
+      "message" : "message",
+      "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+      "writerUserName" : "writerUserName"
+    }, {
+      "id" : 7,
+      "message" : "message",
+      "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+      "writerUserName" : "writerUserName"
+    } ],
+    "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+    "rootId" : 1,
+    "level" : 5,
+    "lastModifiedBy" : "lastModifiedBy",
+    "originalMimeType" : "originalMimeType",
+    "fileLocation" : "fileLocation",
+    "mimeType" : "mimeType",
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "version" : 6,
+    "parentId" : 5,
+    "tags" : [ "tags", "tags" ],
+    "originalName" : "originalName",
+    "size" : 2,
+    "createdBy" : "createdBy",
+    "children" : [ {
+      "name" : "name",
+      "id" : 2
+    }, {
+      "name" : "name",
+      "id" : 2
+    } ],
+    "name" : "name",
+    "id" : 0,
+    "originalSize" : "originalSize",
+    "workflowId" : "workflowId"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#UpdateDocumentResponseDTO">UpdateDocumentResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateFolder"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /folder/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateFolder</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UpdateFolderRequestDTO">UpdateFolderRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UpdateFolderResponseDTO">UpdateFolderResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "folder" : {
+    "folderChildren" : [ {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    }, {
+      "accessMap" : [ null, null ],
+      "name" : "name",
+      "active" : true,
+      "id" : 9
+    } ],
+    "documentChildren" : [ {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    }, {
+      "originalName" : "originalName",
+      "itemType" : "FOLDER",
+      "name" : "name",
+      "id" : 7
+    } ],
+    "lastModifiedDate" : "2000-01-23T04:56:07.000+00:00",
+    "rootId" : 1,
+    "level" : 5,
+    "lastModifiedBy" : "lastModifiedBy",
+    "active" : true,
+    "creationDate" : "2000-01-23T04:56:07.000+00:00",
+    "version" : 6,
+    "parentId" : 5,
+    "createdBy" : "createdBy",
+    "children" : [ {
+      "name" : "name",
+      "id" : 2
+    }, {
+      "name" : "name",
+      "id" : 2
+    } ],
+    "accessMap" : [ {
+      "authority" : "authority",
+      "rights" : "Owner"
+    }, {
+      "authority" : "authority",
+      "rights" : "Owner"
+    } ],
+    "name" : "name",
+    "id" : 0,
+    "workflowId" : "workflowId"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#UpdateFolderResponseDTO">UpdateFolderResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="NoteController">NoteController</a></h1>
+  <div class="method"><a name="addNote"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /document/{docId}/note</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">addNote</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">docId (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#AddNoteRequestDTO">AddNoteRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AddNoteResponseDTO">AddNoteResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "note" : {
+    "id" : 7,
+    "message" : "message",
+    "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+    "writerUserName" : "writerUserName"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#AddNoteResponseDTO">AddNoteResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteNote"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /document/note/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteNote</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateNote"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /document/note/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">updateNote</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  format: int64</div>    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#UpdateNoteRequestDTO">UpdateNoteRequestDTO</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UpdateNoteResponseDTO">UpdateNoteResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "note" : {
+    "id" : 7,
+    "message" : "message",
+    "writtenDate" : "2000-01-23T04:56:07.000+00:00",
+    "writerUserName" : "writerUserName"
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#UpdateNoteResponseDTO">UpdateNoteResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="SearchController">SearchController</a></h1>
+  <div class="method"><a name="searchDocuments"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /searchdocuments</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">searchDocuments</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">query (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">sortField (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">sortDir (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">page (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div>      <div class="param">countPerPage (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  format: int32</div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SearchDocumentsResponseDTO">SearchDocumentsResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "totalPage" : 0,
+  "countPerPage" : 1,
+  "count" : 5,
+  "page" : 6,
+  "searchResults" : [ {
+    "fileName" : "fileName",
+    "vectorDistance" : 7.386282,
+    "docId" : 5,
+    "active" : true,
+    "rootFolderId" : 2,
+    "noteId" : 4,
+    "fileLocation" : "fileLocation",
+    "type" : "type",
+    "version" : 9,
+    "folderId" : 2,
+    "tags" : [ "tags", "tags" ],
+    "size" : 3,
+    "snippets" : [ "snippets", "snippets" ],
+    "folderName" : "folderName",
+    "page" : 7,
+    "workflowId" : "workflowId"
+  }, {
+    "fileName" : "fileName",
+    "vectorDistance" : 7.386282,
+    "docId" : 5,
+    "active" : true,
+    "rootFolderId" : 2,
+    "noteId" : 4,
+    "fileLocation" : "fileLocation",
+    "type" : "type",
+    "version" : 9,
+    "folderId" : 2,
+    "tags" : [ "tags", "tags" ],
+    "size" : 3,
+    "snippets" : [ "snippets", "snippets" ],
+    "folderName" : "folderName",
+    "page" : 7,
+    "workflowId" : "workflowId"
+  } ],
+  "status" : "status"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#SearchDocumentsResponseDTO">SearchDocumentsResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="searchUsers"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /searchusers</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">searchUsers</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">query (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#SearchUsersResponseDTO">SearchUsersResponseDTO</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "searchResults" : [ {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "email" : "email",
+    "username" : "username"
+  }, {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "email" : "email",
+    "username" : "username"
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>*/*</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#SearchUsersResponseDTO">SearchUsersResponseDTO</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#AddDocumentRequestDTO"><code>AddDocumentRequestDTO</code></a></li>
+    <li><a href="#AddDocumentResponseDTO"><code>AddDocumentResponseDTO</code></a></li>
+    <li><a href="#AddFolderRequestDTO"><code>AddFolderRequestDTO</code></a></li>
+    <li><a href="#AddFolderResponseDTO"><code>AddFolderResponseDTO</code></a></li>
+    <li><a href="#AddNoteRequestDTO"><code>AddNoteRequestDTO</code></a></li>
+    <li><a href="#AddNoteResponseDTO"><code>AddNoteResponseDTO</code></a></li>
+    <li><a href="#DocumentDataDTO"><code>DocumentDataDTO</code></a></li>
+    <li><a href="#DocumentDataProxyDTO"><code>DocumentDataProxyDTO</code></a></li>
+    <li><a href="#FolderAccess"><code>FolderAccess</code></a></li>
+    <li><a href="#FolderAccessDTO"><code>FolderAccessDTO</code></a></li>
+    <li><a href="#FolderDTO"><code>FolderDTO</code></a></li>
+    <li><a href="#FolderProxyDTO"><code>FolderProxyDTO</code></a></li>
+    <li><a href="#ItemProxyDTO"><code>ItemProxyDTO</code></a></li>
+    <li><a href="#NoteDTO"><code>NoteDTO</code></a></li>
+    <li><a href="#SearchDataDTO"><code>SearchDataDTO</code></a></li>
+    <li><a href="#SearchDocumentsResponseDTO"><code>SearchDocumentsResponseDTO</code></a></li>
+    <li><a href="#SearchUsersResponseDTO"><code>SearchUsersResponseDTO</code></a></li>
+    <li><a href="#StreamingResponseBody"><code>StreamingResponseBody</code></a></li>
+    <li><a href="#UpdateDocumentRequestDTO"><code>UpdateDocumentRequestDTO</code></a></li>
+    <li><a href="#UpdateDocumentResponseDTO"><code>UpdateDocumentResponseDTO</code></a></li>
+    <li><a href="#UpdateFolderRequestDTO"><code>UpdateFolderRequestDTO</code></a></li>
+    <li><a href="#UpdateFolderResponseDTO"><code>UpdateFolderResponseDTO</code></a></li>
+    <li><a href="#UpdateNoteRequestDTO"><code>UpdateNoteRequestDTO</code></a></li>
+    <li><a href="#UpdateNoteResponseDTO"><code>UpdateNoteResponseDTO</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#folderId_document_body"><code>folderId_document_body</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="AddDocumentRequestDTO"><code>AddDocumentRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">folderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">workflowId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">folderName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">folderAccess (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderAccessDTO">array[FolderAccessDTO]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AddDocumentResponseDTO"><code>AddDocumentResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">document (optional)</div><div class="param-desc"><span class="param-type"><a href="#DocumentDataDTO">DocumentDataDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AddFolderRequestDTO"><code>AddFolderRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">workflowId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">folderName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">parentFolderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">accessMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderAccess">array[FolderAccess]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AddFolderResponseDTO"><code>AddFolderResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">folder (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderDTO">FolderDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AddNoteRequestDTO"><code>AddNoteRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">documentId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="AddNoteResponseDTO"><code>AddNoteResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">note (optional)</div><div class="param-desc"><span class="param-type"><a href="#NoteDTO">NoteDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="DocumentDataDTO"><code>DocumentDataDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">workflowId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">createdBy (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">creationDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">lastModifiedBy (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastModifiedDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">rootId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">parentId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">children (optional)</div><div class="param-desc"><span class="param-type"><a href="#ItemProxyDTO">array[ItemProxyDTO]</a></span>  </div>
+<div class="param">fileLocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">mimeType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">size (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">originalName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">originalSize (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">originalMimeType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">notes (optional)</div><div class="param-desc"><span class="param-type"><a href="#NoteDTO">array[NoteDTO]</a></span>  </div>
+<div class="param">documentChildren (optional)</div><div class="param-desc"><span class="param-type"><a href="#DocumentDataProxyDTO">array[DocumentDataProxyDTO]</a></span>  </div>
+<div class="param">folderChildren (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderProxyDTO">array[FolderProxyDTO]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="DocumentDataProxyDTO"><code>DocumentDataProxyDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">itemType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">FOLDER</div><div class="param-enum">DOCUMENT</div>
+<div class="param">originalName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FolderAccess"><code>FolderAccess</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">authority (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rights (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Owner</div><div class="param-enum">Create and update</div><div class="param-enum">Read</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FolderAccessDTO"><code>FolderAccessDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">authority (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rights (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Owner</div><div class="param-enum">Create and update</div><div class="param-enum">Read</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FolderDTO"><code>FolderDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">workflowId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">createdBy (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">creationDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">lastModifiedBy (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastModifiedDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+<div class="param">rootId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">level (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">parentId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">children (optional)</div><div class="param-desc"><span class="param-type"><a href="#ItemProxyDTO">array[ItemProxyDTO]</a></span>  </div>
+<div class="param">accessMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderAccessDTO">array[FolderAccessDTO]</a></span>  </div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">documentChildren (optional)</div><div class="param-desc"><span class="param-type"><a href="#DocumentDataProxyDTO">array[DocumentDataProxyDTO]</a></span>  </div>
+<div class="param">folderChildren (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderProxyDTO">array[FolderProxyDTO]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FolderProxyDTO"><code>FolderProxyDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">accessMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderAccessDTO">array[FolderAccessDTO]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ItemProxyDTO"><code>ItemProxyDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="NoteDTO"><code>NoteDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">writerUserName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">writtenDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span>  format: date-time</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SearchDataDTO"><code>SearchDataDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">docId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">workflowId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">folderName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">folderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">page (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">fileName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">fileLocation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">version (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">size (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">rootFolderId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">noteId (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">snippets (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">vectorDistance (optional)</div><div class="param-desc"><span class="param-type"><a href="#float">Float</a></span>  format: float</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SearchDocumentsResponseDTO"><code>SearchDocumentsResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">totalPage (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">page (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">countPerPage (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">count (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">searchResults (optional)</div><div class="param-desc"><span class="param-type"><a href="#SearchDataDTO">array[SearchDataDTO]</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SearchUsersResponseDTO"><code>SearchUsersResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">searchResults (optional)</div><div class="param-desc"><span class="param-type"><a href="#User">array[User]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="StreamingResponseBody"><code>StreamingResponseBody</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateDocumentRequestDTO"><code>UpdateDocumentRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">tags (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateDocumentResponseDTO"><code>UpdateDocumentResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">document (optional)</div><div class="param-desc"><span class="param-type"><a href="#DocumentDataDTO">DocumentDataDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateFolderRequestDTO"><code>UpdateFolderRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">folderName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">active (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">accessMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderAccessDTO">array[FolderAccessDTO]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateFolderResponseDTO"><code>UpdateFolderResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">folder (optional)</div><div class="param-desc"><span class="param-type"><a href="#FolderDTO">FolderDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateNoteRequestDTO"><code>UpdateNoteRequestDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateNoteResponseDTO"><code>UpdateNoteResponseDTO</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">note (optional)</div><div class="param-desc"><span class="param-type"><a href="#NoteDTO">NoteDTO</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">firstName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="folderId_document_body"><code>folderId_document_body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">file </div><div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span>  format: binary</div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
