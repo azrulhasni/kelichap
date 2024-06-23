@@ -629,7 +629,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 
 ![](README.images/hOPJ9r.jpg)
 
--   Note that Kelichap will create thee new collections as and when needed but
+-   Note that Kelichap will create the new collections as and when needed but
     the first collection and alias must be created manually (or through an
     automated CD pipeline) before Kelichap is started.
 
@@ -809,7 +809,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 **Setting up Kelichap realm**
 
 -   Download the realm export file:
-    <https://github.com/azrulhasni/kelichap/blob/main/keycloak/kelichap-realm-export.json>
+    <https://raw.githubusercontent.com/azrulhasni/kelichap/main/keycloak/keycloak-realm-export.json>
 
 -   Log in as admin in Keycloak
 
@@ -910,7 +910,20 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 
 **Administrator user**
 
--   Create a
+-   Create another user specifically to administer Kelichap:
+
+    -   User name: kelichap.admin (or anything else)
+
+    -   Password: Any password - there is no need too configure Kelichap with
+        this passwoord. The password should be kept by the administrator
+
+    -   Role:
+
+        -   `KELICHAP_ADMIN` under kelichap-client
+
+
+
+![](README.images/zAymcy.jpg)
 
 **Active Directory / LDAP**
 
@@ -1363,7 +1376,7 @@ quay.io/keycloak/keycloak:24.0.4 start-dev \
 >./mvnw spring-boot:run.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--   To build Kelichap for production, firstly customise the parameters in thee
+-   To build Kelichap for production, firstly customise the parameters in the
     jib plugin in the pom.xml file. Point the `<image>` to the registry where we
     want to deploy our image.
 
