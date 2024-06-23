@@ -921,9 +921,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 
         -   `KELICHAP_ADMIN` under kelichap-client
 
-
-
-![](README.images/zAymcy.jpg)
+        ![](README.images/zAymcy.jpg)
 
 **Active Directory / LDAP**
 
