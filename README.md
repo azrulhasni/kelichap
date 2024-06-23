@@ -115,6 +115,8 @@ Kelichap is equipped with a few features:
 
  
 
+User manual can be found [here](User-manual.md)
+
  
 
 Architecture

@@ -8,7 +8,7 @@ User Manual
 
  
 
-Current version 1.1
+Current version 1.2
 
  
 
@@ -60,7 +60,7 @@ Current version 1.1
 
  
 
->   **Access right too a folder**
+>   **Access right to a folder**
 
 >   The are 2 access rights
 
@@ -210,7 +210,7 @@ Current version 1.1
         choose among many tags shown.
 
     5.  Click on the ‘Upload Files’ button and choose a document. Click on
-        ’Save’ too permanently save the document. Note that the uploaded file
+        ’Save’ to permanently save the document. Note that the uploaded file
         will be converted to pdf for viewing but user will still have access to
         the original version.
 
@@ -264,7 +264,7 @@ Current version 1.1
 >   Version tab.
 
 >   Note: although an earlier version of a document is available to be read,
->   search could only be done on thee latest version of a document.
+>   search could only be done on the latest version of a document.
 
  
 
@@ -357,10 +357,10 @@ Current version 1.1
     field. Key in ‘Enter’ or click on the ’Search’ button. The result of the
     search will appear
 
-2.  Thee search will naturally covers all documents in all accessible folders.
-    If the user wants to search a particular folder for a particular document,
+2.  The search will naturally covers all documents in all accessible folders. If
+    the user wants to search a particular folder for a particular document,
     highlight the document in the folder tree and do the search. In this case,
-    only thee selected folder or document is searched.
+    only the selected folder or document is searched.
 
 3.  To clear the selection of a folder in folder tree, click on ‘Clear
     selection'
