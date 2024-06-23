@@ -636,7 +636,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 -   Create the user collection
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    curl "http://192.168.49.14:8108/collections" -X POST -H "Content-Type: application/json" -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" -d '{
+    > curl "http://192.168.49.14:8108/collections" -X POST -H "Content-Type: application/json" -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" -d '{
              "name": "kelichap-users-0",
              "fields": [
                {"name": "id", "type": "string" , "sort": true },
@@ -652,7 +652,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
     (kelichap-users-0) in the API input
 
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    curl "http://192.168.49.14:8108/aliases/kelichap-users" -X PUT     -H "Content-Type: application/json"     -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" -d '{
+    > curl "http://192.168.49.14:8108/aliases/kelichap-users" -X PUT     -H "Content-Type: application/json"     -H "X-TYPESENSE-API-KEY: ${TYPESENSE_API_KEY}" -d '{
             "collection_name": "kelichap-users-0"
         }'
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -898,7 +898,7 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
 
     -   Roles:
 
-        -   `KELICHAP_USER`under kelichap-client
+        -   `KELICHAP_USER `under kelichap-client
 
         -   `view-users` under realm-management (as depicted below)
 
@@ -907,6 +907,10 @@ SPRING_JPA_HIBERNATE_DDLAUTO in deployment.yaml to ‘update'
  
 
  
+
+**Administrator user**
+
+-   Create a
 
 **Active Directory / LDAP**
 
